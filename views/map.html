@@ -1,0 +1,26 @@
+<div id="map_container" ng-init="initMap()">
+	<div id="map_controls">
+		<button id="zoomin" type="button" class="btn btn-default" ng-mousedown="zoom.in.mousedown()" ng-mouseup="zoom.in.mouseup()">
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>
+		<button id="zoomout" type="button" class="btn btn-default" ng-mousedown="zoom.out.mousedown()"  ng-mouseup="zoom.out.mouseup()">
+			<span class="glyphicon glyphicon-minus"></span>
+		</button>
+	</div>
+	<div id="interactive_map" ng-mousedown="dragstart()" ng-mouseup="dragend()" ng-mouseleave="dragend()">
+		<div class="indicator" ng-repeat="(index, indicator) in indicators">
+			<span class="indicator-sign" ng-click="showDescription(index)" style="top: {{ indicator.position.top }}; left: {{ indicator.position.left }}"></span>
+			<div class="description" ng-show="isShowing(index)">
+				<span class="close glyphicon glyphicon-remove" ng-click="hideDescription()"></span>
+				<h1>{{indicator.name}}</h1>
+
+				<p>{{ indicator.description }}</p>
+
+				<h2>Aanbevelingen</h2>
+				<ul>
+					<li ng-repeat="recommendation in indicator.recommendations">{{ recommendation }}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

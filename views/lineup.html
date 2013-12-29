@@ -1,0 +1,43 @@
+<div> <!--ng-init="formatDate()"-->
+    <div class="row">
+        <div class="col-xs-12" >
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Line Up</li>
+            </ol>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Main Stage</h2></div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="artist in _artists  | filter:isAtStage1">
+                        <a href="#stage/{{artist.stage.id}}/artist/{{artist.artist_id}}">
+                            <h4>{{artist.artist.artistname}}</h4>
+                        </a>
+                        <i class="fa fa-2x fa-star pull-right star" ng-show="isArtistInMySchedule({{artist.artist.id}})"></i>
+                        <span>{{artist.start}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Marquee</h2></div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="artist in _artists  | filter:isAtStage2">
+                        <a href="#stage/{{artist.stage.id}}/artist/{{artist.artist_id}}">
+                            <h4>{{artist.artist.artistname}}</h4>
+                        </a>
+                        <i class="fa fa-2x fa-star pull-right star" ng-show="isArtistInMySchedule({{artist.artist.id}})"></i>
+                        <span>{{artist.start}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

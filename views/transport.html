@@ -1,0 +1,44 @@
+<div class="row" ng-init="init()">
+	<div class="col-xs-12">
+		<h1>Transport</h1>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{ transport.user.username }}</h3>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item" ng-show="transport.direction.heen">
+                	<strong>Heen:</strong> {{ transport.heen.date }} om {{ transport.heen.time }}
+				</li>
+				<li class="list-group-item" ng-show="transport.direction.terug">
+                	<strong>Terug:</strong> {{ transport.heen.date }} om {{ transport.heen.time }}
+				</li>
+				<li class="list-group-item">
+                	<strong>Vanaf/Naar:</strong> {{ transport.address }}
+				</li>
+				<li class="list-group-item">
+                	<strong>Beschikbare plaatsen:</strong> {{ transport.seats }}
+				</li>
+			</ul>
+		</div>
+
+		<button ng-hide="userIsCreator()" class="btn btn-default" ng-click="SendRequest()">Rijd mee!</button>
+
+		<div class="panel" ng-show="userIsCreator()">
+			<h2>requests</h2>
+			<table class="table">
+				<tr ng-repeat="request in transport.requests" ng-show="!isApproved(request.approved)">
+					<td>{{ request.user.username }} wil meerijden!</td>
+					<td>
+						<a href><i class="fa fa-check"></i></a>
+						<a href><i class="fa fa-times"></i></a>
+					</td>
+				</tr>
+				<tr ng-repeat="request in transport.requests" ng-show="isApproved(request.approved)">
+					<td>{{ request.user.username }} rijdt mee!</td>
+					<td><a href><i class="fa fa-times"></i></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#lineup">Line Up</a></li>
+        <li class="active">{{artists.artist.artistname | filter:isAtStage}}</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <article class="artist-details">
+            <h1>{{artists.artist.artistname}}</h1>
+            <p class="list-group-item-text">Start: {{artists.start | filter:isAtStage}}</p>
+            <p class="list-group-item-text">End: {{artists.end | filter:isAtStage}}</p>
+            <p class="list-group-item-text">Members: {{artists.artist.members | filter:isAtStage}}</p>
+            <p class="list-group-item-text">Description: {{artists.artist.description | filter:isAtStage}}</p>
+        </article>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <button type="button" ng-hide="isArtistInMySchedule" class="btn btn-default" ng-click="addArtistToMySchedule()">Add To Your Schedule</button>
+        <button type="button" ng-show="isArtistInMySchedule" class="btn btn-default" ng-click="removeArtistFromMySchedule()">Remove From Your Schedule</button>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="row">
+	<ul class="nav nav-tabs">
+	  	<li class="active"><a href="#publictransport">Public Transport</a></li>
+	  	<li><a href="#carpooling">Carpooling</a></li>
+	</ul>
+	<div class="col-xs-12">
+		<form role="form">
+		  <div class="form-group">
+		  		<div class="col-xs-12">
+		    		<label for="from">From:</label>
+	    		</div>
+	    		<div class="col-xs-10">
+		    		<input type="text" ng-model="from" ng-autocomplete="result" details="details" class="form-control" id="from" placeholder="Enter address">
+    			</div>
+    			<div class="col-xs-2">
+		    		<button ng-click="getCurrentLocation()"><span class="glyphicon glyphicon-screenshot"></span></button>
+	    		</div>
+		  </div>
+		  <button ng-click="getDirections()" class="btn btn-default">Submit</button>
+	  	</form>
+  	</div>
+</div>
+<div class="row">
+	<div class="panel col-xs-12">
+		<div id="directionsPanel"></div>
+	</div>
+</div>

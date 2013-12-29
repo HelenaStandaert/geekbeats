@@ -1,0 +1,15 @@
+<div class="col-xs-12" ng-init="init()">
+	<h1>Find your tentje</h1>
+	<p>Als je alle hoop verloren bent, kan je hier beroep doen op de find-your-tentje tool. Deze geeft aan of je de juiste richting op aan het gaan bent. Probeer het maar!</p>
+
+	<div class="errors" ng-show="nolocation">
+	    <div class="alert alert-danger">
+	        <p>Oops, het lijkt erop dat je nog geen geolocatie hebt ingesteld voor je tentje. Je moet deze eerst instellen. Ga naar instellingen om dit te doen.</p>
+	    </div>
+	</div>
+	<div class="tentje_button" ng-hide="nolocation">
+		<button type="button" class="btn btn-default btn-lg" ng-click="startSearch()" ng-hide="search">Start</button>
+		<span class="hot_and_cold_indicator" ng-show="search"></span>
+		<h1 id="instruction">{{ distance }}</h1>
+	</div>
+</div> 

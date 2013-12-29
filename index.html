@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="gbApp" xmlns:ng="http://angularjs.org">
+<head>
+    <title></title>
+
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap-theme.css">
+
+    <!-- FONT Awesome CSS -->
+    <link rel="stylesheet" href="components/font-awesome/css/font-awesome.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="components/leaflet/dist/leaflet.css">
+
+    <!-- Application CSS -->
+    <link rel="stylesheet" href="styles/app.css">
+
+    <!-- Modernizr -->
+    <script src="components/modernizr/modernizr.js"></script>
+</head>
+<body>
+   <!--  <div class="preloader" ng-hide="appInitialized">
+        <div class="preloader-indicator">BEATS ARE LOADING...<br /><img src="content/images/preloader.gif" /></div>
+    </div> -->
+    <div id="header_wrapper" ng-show="appInitialized">
+        <header id="header">
+            <a class="goback" ng-click="goBack()"><i class="fa fa-arrow-circle-o-left"></i></a>
+            <a href="#">Geekbeats</a>
+            <a class="login" href="#login"><i class="fa fa-sign-in"></i></a>
+            <a class="logout" ng-click="logOut()"><i class="fa fa-sign-out"></i></a>
+        </header>
+    </div>
+    <div id="content-wrapper" class="container" ng-show="appInitialized" ng-view>
+    </div>
+
+    <!-- Google maps -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+
+    <!-- jQUERY JS -->
+    <script src="components/jquery/jquery.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <!-- Leaflet JS -->
+    <script src="scripts/leaflet.js"></script>
+
+    <!-- Lodash JS -->
+    <script src="components/lodash/dist/lodash.js"></script>
+
+    <!-- Angular JS -->
+    <script src="components/angular/angular.js"></script>
+
+    <!-- Angular Resource JS -->
+    <script src="components/angular-resource/angular-resource.js"></script>
+
+    <!-- Angular Route JS -->
+    <script src="components/angular-route/angular-route.js"></script>
+
+    <!-- Angular LocalStorage -->
+    <script src="components/angular-local-storage/angular-local-storage.js"></script>
+
+    <!-- Angular Base64 -->
+    <script src="components/angular-base64/angular-base64.js"></script>
+
+     <!-- Angular Autocomplete -->
+    <script src="components/ngAutoComplete/src/ngAutoComplete.js"></script>
+
+    <!-- Angular Google Maps -->
+    <script src="components/angular-google-maps/dist/angular-google-maps.js"></script>
+
+
+    <!-- Application JS -->
+    <script src="scripts/app.js"></script>
+
+    <!-- Application JS -->
+    <!--
+        ANGULAR CONTROLLERS
+    -->
+    <script src="scripts/controllers/AboutCtrl.js"></script>
+    <script src="scripts/controllers/ChecklistCtrl.js"></script>
+    <script src="scripts/controllers/FindYourTentjeCtrl.js"></script>
+    <script src="scripts/controllers/LoginCtrl.js"></script>
+    <script src="scripts/controllers/LineUpCtrl.js"></script>
+    <script src="scripts/controllers/MainCtrl.js"></script>
+    <script src="scripts/controllers/MapCtrl.js"></script>
+    <script src="scripts/controllers/ProfileCtrl.js"></script>
+    <script src="scripts/controllers/MyScheduleCtrl.js"></script>
+    <script src="scripts/controllers/PublicTransportCtrl.js"></script>
+    <script src="scripts/controllers/RegisterCtrl.js"></script>
+    <script src="scripts/controllers/SettingsCtrl.js"></script>
+    <script src="scripts/controllers/ArtistCtrl.js"></script>
+    <script src="scripts/controllers/CarpoolingCtrl.js"></script>
+    <script src="scripts/controllers/TransportCtrl.js"></script>
+    
+    <!--
+        ANGULAR SERVICES
+    -->
+    <script src="scripts/services/GeolocSrvc.js"></script>
+    <script src="scripts/services/PerformanceSrvc.js"></script>
+
+    <!--
+        ANGULAR DIRECTIVES
+    -->
+    <script src="scripts/common/directives/LeafletManyPlaces.js"></script>
+    <script src="scripts/common/directives/LeafletOnePlace.js"></script>
+</body>
+</html>

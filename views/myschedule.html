@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3>Order by</h3>
+            <p ng-class="{'active': order=='artist.artistname'}"><a href="#myschedule" ng-click="setOrder('artist.artistname')">Artist</a></p>
+            <p ng-class="{'active': order=='start'}"><a href="#myschedule" ng-click="setOrder('start')">Start</a></p>
+            <p ng-class="{'active': order=='end'}"><a href="#myschedule" ng-click="setOrder('end')">End</a></p>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h1>Main Stage</h1>
+        <p ng-show="(myschedule | filter:isAtStage1).length == 0">No artist yet!</p>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Artist</th>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="my in myschedule | filter:isAtStage1 | orderBy:order">
+                    <td class="artist.artistname">{{ my.artist.artistname }}</td>
+                    <td class="start">{{ my.start }}</td>
+                    <td class="end">{{ my.end }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div><div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h1>Marquee</h1>
+        <p ng-show="(myschedule | filter:isAtStage2).length == 0">No artist yet!</p>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Artist</th>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="my in myschedule | filter:isAtStage2 | orderBy:order">
+                    <td class="artist.artistname">{{ my.artist.artistname }}</td>
+                    <td class="start">{{ my.start }}</td>
+                    <td class="end">{{ my.end }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

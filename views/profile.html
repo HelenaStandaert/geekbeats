@@ -1,0 +1,150 @@
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active" ng-click="TogglePages()"><a href="">Carpooling</a></li>
+        <li ng-click="TogglePages()"><a href="">Edit Info</a></li>
+    </ul>
+    <div class="panel" ng-hide="showProfile" ng-init="getUserRequests()">
+        <div class="col-xs-12">
+        <h2>Carpooling</h2>
+
+    <div class="alert alert-success alert-dismissable" ng-show="showAlertSuccess">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{ success }}
+    </div>
+            <h3>Jouw transports</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Van/naar</td>
+                        <td>Op</td>
+                        <td>Om</td>
+                        <td>Acties</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="transport in user.transports">
+                        <td>{{ transport.address }}</td>
+                        <td>
+                            <span ng-show="transport.direction.heen">{{ transport.heen.date }}</span>
+                            <span ng-show="transport.direction.terug">{{ transport.terug.date }}</span>
+                        </td>
+                        <td>
+                            <span ng-show="transport.direction.heen">{{ transport.heen.time }}</span>
+                            <span ng-show="transport.direction.terug">{{ transport.terug.time }}</span>
+                        </td>
+                        <td>
+                            <a href="#transport/{{transport.id}}"><i class="fa fa-eye"></i></a>
+                            <a href ng-click="DeleteTransport(transport.id)"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Requests</h3>
+            <table class="table table-striped">
+                <tr ng-repeat="request in userRequests" ng-show="!isApproved(request.approved)">
+                    <td><a href>{{ request.user.username }}</a> wil met jou meerijden naar het festival!</td>
+                    <td>
+                        <a href ng-click="confirmation('approve', request.id)"><i class="fa fa-check"></i></a>
+                        <a href ng-click="confirmation('decline', request.id)"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            </table>
+
+            <h3>Jouw Requests</h3>
+            <table class="table table-striped">
+                <tr ng-repeat="request in user.requests" ng-show="!isApproved(request.approved)">
+                    <td ng-show="{{ request.transport.direction.heen }}">Je vroeg om mee te rijden met {{ request.user.username }} op {{ request.transport.heen.date }} om {{ request.transport.heen.time }} vanaf {{ request.transport.address }}
+                    </td>
+                    <td>
+                        <a href ng-click="declineRequest(request.id)"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Reeds goedgekeurd:</strong></td>
+                </tr>
+                <tr ng-repeat="request in user.requests" ng-show="isApproved(request.approved)">
+                    <td ng-show="{{ request.transport.direction.heen }}">Je rijdt mee met {{ request.user.username }} op {{ request.transport.heen.date }} om {{ request.transport.heen.time }} vanaf {{ request.transport.address }}
+                    </td>
+                    <td>
+                        <a href ng-click="declineRequest(request.id)"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel" ng-show="showProfile">
+        <form role="form">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2>Profile</h2>
+                <div class="col-xs-12 col-sm-6 col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label for="firstname">First name</label>
+                        <input id="firstname" name="firstname" type="text" class="form-control" ng-model="user.person.firstname" required>
+
+                        <label for="lastname">Last name</label>
+                        <input id="lastname" name="lastname" type="text" class="form-control" ng-model="user.person.lastname" required>
+
+                        <label for="email">Last name</label>
+                        <input id="email" name="email" type="email" class="form-control" ng-model="user.email" required>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-6 col-md-6">
+                    <div class="form-group">
+                        <label for="dateofbirth">Date of birth</label>
+                        <input id="dateofbirth" name="dateofbirth" type="text" class="form-control" ng-model="user.person.profile.dateofbirth" required>
+
+                        <label for="city">City</label>
+                        <input id="city" name="city" type="text" class="form-control" ng-model="user.person.profile.city" required>
+
+                        <label for="country">Country</label>
+                        <input id="country" name="country" type="text" class="form-control" ng-model="user.person.profile.country" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" name="bio" class="form-control" rows="5" ng-model="user.person.profile.bio" required></textarea>
+
+                    <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Update!</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Personal information</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to update your personal information?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="updateUser()">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Aha!</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to {{ action }} this request?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" ng-click="execute(confirmation_id)">Yes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

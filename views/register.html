@@ -1,0 +1,135 @@
+<h1>Registreren</h1>
+
+<div class="errors">
+    <div class="alert alert-danger">
+        <ul>
+            <li ng-Repeat="error in errors"> {{ error }}</li>
+        </ul>
+    </div>
+</div>
+<form role="form simple-form" action="" method="POST">
+    <div class="form-group">
+        <label for="firstname" class="col-sm-2 control-label">First name:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" ng-required="true" ng-model="user.firstname" id="firstname">
+        </div>
+        <label for="lastname" class="col-sm-2 control-label">Last name:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" ng-required="true" ng-model="user.lastname" id="lastname">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">Username:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" ng-required="true" ng-model="user.username" id="username">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" ng-required="true" ng-model="user.email" id="email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" ng-required="true" ng-model="user.password" id="password" placeholder="Password">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="password" class="form-control" ng-required="true" ng-model="user.password_confirmation" id="password_confirmation" placeholder="Password Confirmation">
+        </div>
+    </div>
+    <div class="col-sm-offset-2 col-sm-10 col-md-5 clearfix">
+        <div class="form-group">
+            <div class="radio-inline">
+                <label>
+                    <input type="radio" ng-required="true" ng-model="user.sex" name="sex" id="male" checked="true">
+                        Male
+                </label>
+            </div>
+            <div class="radio-inline">
+                <label>
+                    <input type="radio" ng-required="true" ng-model="user.sex" name="sex" id="female" checked="false">
+                        Female
+                </label>
+            </div>
+        </div>
+        <div class="form-group col-xs-3">
+            <label for="day" class="control-label">Day</label>
+            <select id="day" ng-required="true" ng-model="user.day" class="form-control">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                  <option>13</option>
+                  <option>14</option>
+                  <option>15</option>
+                  <option>16</option>
+                  <option>17</option>
+                  <option>18</option>
+                  <option>19</option>
+                  <option>20</option>
+                  <option>21</option>
+                  <option>22</option>
+                  <option>23</option>
+                  <option>24</option>
+                  <option>25</option>
+                  <option>26</option>
+                  <option>27</option>
+                  <option>28</option>
+                  <option>29</option>
+                  <option>30</option>
+                  <option>31</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-5">
+            <label for="month" class="control-label">Month</label>
+            <select id="month" ng-required="true" ng-model="user.month" class="form-control">
+                  <option value="1">Januari</option>
+                  <option value="2">Februari</option>
+                  <option value="3">Maart</option>
+                  <option value="4">April</option>
+                  <option value="5">Mei</option>
+                  <option value="6">Juni</option>
+                  <option value="7">Juli</option>
+                  <option value="8">Augustus</option>
+                  <option value="9">September</option>
+                  <option value="10">Oktober</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-4">
+            <label for="year" class="year">Year</label>
+            <select id="year" ng-required="true" ng-model="user.year" class="form-control">
+                <option>1990</option>
+                <option>1991</option>
+                <option>1992</option>
+                <option>1993</option>
+                <option>1994</option>
+                <option>1995</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-offset-2 col-sm-10 col-md-5">
+        <div class="form-group">
+            <label for="bio" class="control-label">Bio</label>
+            <textarea id="bio" ng-model="user.bio" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button ng-click="register()" class="btn btn-default">Register</button>
+        </div>
+    </div>
+</form>

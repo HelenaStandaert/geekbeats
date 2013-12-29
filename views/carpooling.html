@@ -1,0 +1,162 @@
+<div class="row" ng-init="init()">
+	<ul class="nav nav-tabs">
+	  	<li><a href="#publictransport">Public Transport</a></li>
+	  	<li class="active"><a href="#carpooling">Carpooling</a></li>
+	</ul>
+	<div class="col-xs-12">
+		<h1>Carpooling</h1>
+
+	<div class="alert alert-success alert-dismissable" ng-show="transportAdded">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Great!</strong> The transport has been added!
+	</div>
+		<!-- Button trigger modal -->
+	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	  Add a transport
+	</button>
+</div>
+<!--
+	 <google-map center="center" 
+            zoom="zoom" 
+            markers="markers" 
+            style="height: 400px; width: 100%; display: block;">
+	</google-map>
+-->
+<div class="row col-xs-12">
+	<form class="form-inline" role="form">
+		<fieldset>
+			<legend>Direction</legend>
+			<label class="checkbox-inline">
+				<input type="checkbox" value="1" ng-model="search.direction.heen" ng-change="showHeenOnForm()" checked> Heen
+			</label>
+			<label class="checkbox-inline">
+				<input type="checkbox" value="-1" ng-model="search.direction.terug" ng-change="showTerugOnForm()"> Terug
+			</label>
+		</fieldset>
+		<div class="col-xs-9">
+			<div class="form-group">
+				<input type="text" class="form-control" ng-autocomplete="result" details="details" placeholder="Address" ng-model="search.from">
+			</div>
+		</div>
+		<div class="col-xs-3">
+			<button class="btn btn-default" ng-click="doSearch()">Search</button>
+		</div>
+		<div class="col-xs-9" ng-show="heenVisibleOnForm">
+			<div class="form-group">
+				<label>Heen</label>
+				<select class="form-control" ng-model="search.heen">
+					<option>09-01-2014</option>
+					<option>10-01-2014</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-xs-9" ng-show="terugVisibleOnForm">
+			<div class="form-group">
+				<label>Terug</label>
+				<select class="form-control" ng-model="search.terug">
+					<option>10-01-2014</option>
+					<option>11-01-2014</option>
+				</select>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="row" ng-show="showResults">
+	<div class="col-xs-12">
+		<table id="results" class="table table-striped">
+			<thead>
+				<tr>
+					<td>Datum</td>
+					<td>Tijd</td>
+					<td>Chauffeur</td>
+					<td>Plaatsen</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="result in results" ng-click="goToTransport(result.id)">
+					<td>
+						<span class="heen" ng-show="result.direction.heen">{{ result.heen.date}}</span>
+						<span class="heen" ng-show="result.direction.terug">{{ result.terug.date}}</span>
+					</td>
+					<td>
+						<span class="heen" ng-show="result.direction.heen">{{ result.heen.time}}</span>
+						<span class="heen" ng-show="result.direction.terug">{{ result.terug.time}}</span>
+					</td>
+					<td>{{ result.user.username }}</td>
+					<td>{{ result.seats }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+	<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Add a transport</h4>
+      </div>
+      <div class="modal-body">
+		<div class="alert alert-danger" ng-show="showErrors">
+			<strong>Ooh!</strong> There were some errors.
+			<ul>
+				<li ng-repeat="error in errors">{{ error }}</li>
+			</ul>
+		</div>
+      	<form role="form" name="{addTransport}">
+			<div class="form-group">
+				<label>Seats</label>
+				<input type="text" class="form-control" ng-model="transport.seats">
+			</div>
+			<div class="form-group">
+				<label>Address</label>
+				<input type="text" class="form-control" ng-model="transport.address">
+			</div>
+			<fieldset>
+				<legend>Direction</legend>
+				<label class="checkbox-inline">
+					<input type="checkbox" value="1" ng-model="transport.direction.heen" ng-change="changeHeen()"> Heen
+				</label>
+				<label class="checkbox-inline">
+					<input type="checkbox" value="-1" ng-model="transport.direction.terug" ng-change="changeTerug()"> Terug
+				</label>
+			</fieldset>
+			<fieldset ng-show="heenVisible">
+				<legend>Heen</legend>
+				<div class="form-group">
+					<label>Hour</label>
+					<input type="text" class="form-control" ng-model="transport.heen.hour">
+				</div>
+				<div class="form-group">
+					<label>Date</label>
+					<select class="form-control" ng-model="transport.heen.date">
+						<option>9-01-2014</option>
+						<option>10-01-2014</option>
+					</select>
+				</div>
+			</fieldset>
+			<fieldset ng-show="terugVisible">
+				<legend>Terug</legend>
+				<div class="form-group">
+					<label>Hour</label>
+					<input type="text" class="form-control" ng-model="transport.terug.hour">
+				</div>
+				<div class="form-group">
+					<label>Date</label>
+					<select class="form-control" ng-model="transport.terug.date">
+						<option>10-01-2014</option>
+						<option>11-01-2014</option>
+					</select>
+				</div>
+			</fieldset>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="addTransport()">Add it</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
